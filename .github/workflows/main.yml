@@ -1,13 +1,14 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+name: My Workflow
 on: [push]
 jobs:
-  check-bats-version:
+  my_job:
     runs-on: ubuntu-latest
     steps:
-      - run: curl \
+      - name: My Step
+        run: |
+          curl \
             -X POST \
             -H "Content-Type: application/json" \
-            -H "Authorization: lin_api_HmzwFahgQjYaVp4XArtwjeUHBB0tuPn5H04NPZp7" \
-           --data '{ "query": "{ issues { nodes { id title } } }" }' \
+            -H "Authorization: ${{ secrets.API_KEY }}" \
+            --data '{ "query": "{ issues { nodes { id title } } }" }' \
             https://api.linear.app/graphql
